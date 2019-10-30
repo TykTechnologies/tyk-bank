@@ -93,8 +93,7 @@ If you are using everything included in this guide, you can skip to next section
 You will need to inject the generated GraphQL User ID into the OIDC claims (`ID_TOKEN`) so this app can inject it into the Header to Tyk.  Also set up the issuer with your provider when creating the API definition within Tyk.
 
 ## Todos
-Can you help ?
-
+Hello Open Source World, can you help ?
 - Make work without CORS special browser
 - Make work with Windows + Linux
-- Replace 'implicit flow' OIDC with something else
+- Replace 'implicit flow' OIDC with something more secure IE OAuth Access Code Flow

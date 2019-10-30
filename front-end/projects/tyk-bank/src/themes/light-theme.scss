@@ -1,0 +1,9 @@
+$tyk-light-primary: mat-palette($mat-grey, 200, 500, 300);
+$tyk-light-accent: mat-palette($mat-brown, 200);
+$tyk-light-warn: mat-palette($mat-deep-orange, 200);
+
+$tyk-light-theme: mat-light-theme(
+  $tyk-light-primary,
+  $tyk-light-accent,
+  $tyk-light-warn
+);

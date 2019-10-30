@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>{{ 'tyk.settings.user-profile.title' | translate }}</h1>
+
+    <div class="section">
+        <h3>{{ 'tyk.settings.user-profile.general' | translate}}</h3>
+        <mat-form-field>
+            <input placeholder="{{'tyk.settings.user-profile.name' | translate}}" matInput [(ngModel)]="user.name"
+                name="name" value="" />
+        </mat-form-field>
+    </div>
+    <div class="section">
+        <h3>{{'tyk.settings.user-profile.address' | translate}}</h3>
+        <mat-form-field>
+            <input placeholder="{{'tyk.settings.user-profile.street' | translate}}" matInput [(ngModel)]="user.address.street"
+                name="street" value="" />
+        </mat-form-field><br>
+        <mat-form-field>
+            <input placeholder="{{'tyk.settings.user-profile.city' | translate}}" matInput [(ngModel)]="user.address.city"
+                name="city" value="" />
+        </mat-form-field><br>
+        <mat-form-field>
+            <input placeholder="{{'tyk.settings.user-profile.postal-code' | translate}}" matInput
+                [(ngModel)]="user.address.postalCode" name="postalCode" value="" />
+        </mat-form-field><br>
+        <mat-form-field>
+            <input placeholder="{{'tyk.settings.user-profile.country' | translate}}" matInput [(ngModel)]="user.address.country"
+                name="country" value="" />
+        </mat-form-field><br>
+
+        <div>
+            <a [ngClass]="routeAnimationsElements" (click)="updateUser()" mat-raised-button class="actions-main"
+                color="primary">
+                {{ 'tyk.settings.user-profile.update' | translate }}
+            </a>
+        </div>
+
+    </div>
+</div>

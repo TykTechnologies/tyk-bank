@@ -1,0 +1,53 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <h1>{{ 'tyk.transactions.balance' | translate }}: {{ user_balance | async | currency }}</h1>
+      <div class="actions">
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="primary" routerLink="/bank-account/send-money">
+          {{ 'tyk.transactions.send-money' | translate }}
+        </a>
+
+        <a [ngClass]="routeAnimationsElements" mat-raised-button class="actions-main" color="secondary" routerLink="/bank-account/request-loan">
+          {{ 'tyk.transactions.request-loan' | translate }}
+        </a>
+      </div>
+
+      <h2 class="list-title">{{ 'tyk.transactions.transactions' | translate }}</h2>
+      <mat-table [dataSource]="transactions" class="mat-elevation-z8">
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+        </ng-container>
+      
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+        </ng-container>
+      
+        <!-- Sender Column -->
+        <ng-container matColumnDef="from">
+          <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.sender.name}} </mat-cell>
+        </ng-container>
+      
+        <!-- Recipient Column -->
+        <ng-container matColumnDef="to">
+          <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.recipient.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.amount | currency }} </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+</div>

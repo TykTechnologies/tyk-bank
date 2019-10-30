@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+
+@mixin tyk-child-component-theme($theme) {
+  $warn: map-get($theme, warn);
+
+  tyk-child {
+    > div {
+      border-color: mat-color($warn);
+
+      > h2 {
+        color: mat-color($warn);
+      }
+    }
+  }
+}

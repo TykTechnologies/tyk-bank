@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 entry">
+      <tyk-big-input rtl [placeholder]="'tyk.examples.todos.input' | translate" [value]="newTodo" (keyup)="onNewTodoChange($event.target.value)"
+        (keyup.enter)="!isAddTodoDisabled && onAddTodo()" (keyup.escape)="onNewTodoClear()">
+        <tyk-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent"
+          (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'tyk.examples.todos.tooltip.add' | translate"
+          matTooltipPosition="before">
+        </tyk-big-input-action>
+        <tyk-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn"
+          (action)="onRemoveDoneTodos()" [disabled]="removeDoneDisabled$ | async"
+          [matTooltip]="'tyk.examples.todos.tooltip.remove' | translate" matTooltipPosition="after">
+        </tyk-big-input-action>
+      </tyk-big-input>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="todos$ | async as todos">
+      <div class="col-md-6">
+        <h2>
+          {{ 'tyk.examples.todos.list' | translate }}
+          <button class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
+            <fa-icon icon="filter"></fa-icon>
+          </button>
+          <mat-menu class="todos-filter-menu-overlay" #todosFilter="matMenu" xPosition="before">
+            <button mat-menu-item (click)="onFilterTodos('ALL')" [ngClass]="{ active: todos.filter === 'ALL' }">
+              <mat-icon>
+                <fa-icon icon="tasks"></fa-icon>
+              </mat-icon>
+              <span>{{ 'tyk.examples.todos.filter.all' | translate }}</span>
+            </button>
+            <button mat-menu-item (click)="onFilterTodos('DONE')" [ngClass]="{ active: todos.filter === 'DONE' }">
+              <mat-icon>
+                <fa-icon icon="check"></fa-icon>
+              </mat-icon>
+              <span>{{ 'tyk.examples.todos.filter.done' | translate }}</span>
+            </button>
+            <button mat-menu-item (click)="onFilterTodos('ACTIVE')" [ngClass]="{ active: todos.filter === 'ACTIVE' }">
+              <mat-icon>
+                <fa-icon icon="square"></fa-icon>
+              </mat-icon>
+              <span>{{ 'tyk.examples.todos.filter.active' | translate }}</span>
+            </button>
+          </mat-menu>
+          <mat-chip-list class="todos-filter-info d-none d-sm-block d-md-none d-lg-block">
+            <mat-chip [disabled]=true [ngPlural]="todos.length">
+              {{ 'tyk.examples.todos.filter.description' | translate }}
+              <ng-template ngPluralCase="other">{{ todos.length }} {{ 'tyk.examples.todos.filter.items' |
+                translate }}</ng-template>
+              <ng-template ngPluralCase="=1">{{ 'tyk.examples.todos.filter.one' | translate }} {{
+                'tyk.examples.todos.filter.item' | translate }}</ng-template>
+              <ng-template ngPluralCase="=0">{{ 'tyk.examples.todos.filter.none' | translate }} {{
+                'tyk.examples.todos.filter.items' | translate }}</ng-template>
+            </mat-chip>
+          </mat-chip-list>
+        </h2>
+        <mat-card *ngFor="let todo of todos" class="todo" [ngClass]="routeAnimationsElements">
+          <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)"></mat-checkbox>
+          <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
+            &nbsp;{{todo.name}}&nbsp;
+          </span>
+        </mat-card>
+        <br>
+        <br>
+      </div>
+  </ng-container>
+    <div class="offset-md-1 col-md-5" [ngClass]="routeAnimationsElements" rtl>
+      <h2>{{ 'tyk.examples.todos.example' | translate }}</h2>
+      <p>
+        {{ 'tyk.examples.todos.text1' | translate }}
+        <code>{{ 'tyk.examples.todos.text2' | translate }}</code>
+        {{ 'tyk.examples.todos.text3' | translate }}
+      </p>
+      <p>
+        {{ 'tyk.examples.todos.text4' | translate }} <code>ngrx</code>
+        {{ 'tyk.examples.todos.text5' | translate }}
+      </p>
+      <p>{{ 'tyk.examples.todos.text6' | translate }}</p>
+      <br>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,121 @@
+# Use postgres/example user/password credentials
+version: "3.7"
+
+services:
+######### Back end
+  server_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 15432:5432
+    networks:
+    - tyk
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 7777:8080
+    networks:
+    - tyk
+  graphql:
+    depends_on: 
+      - server_db
+      - adminer
+    image: tyk-bank-server
+    build: ./graphql-backend
+    restart: always
+    environment:
+      DB_HOST: server_db
+      DB_PORT: 5432
+    ports:
+      - 18080:18080
+    networks:
+    - tyk
+  loan-service:
+    image: loan-service
+    build: ./loan-service
+    restart: always
+    ports:
+      - 3001:3001
+    environment:
+      GRAPHQLAPI: http://graphql:18080/query
+    networks:
+    - tyk
+######### IdP
+  keycloak:
+    image: jboss/keycloak
+    restart: always
+    volumes:
+    - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json
+    ports:
+      - 8081:8080
+    networks:
+    - tyk
+######### Front-end
+  frontend:
+    image: tyk-bank-fe
+    build: ./front-end
+    restart: always
+    ports:
+      - 4200:4200
+    networks:
+      - tyk
+######### Tyk Stack
+  tyk-dashboard:
+    image: tykio/tyk-dashboard:latest
+    volumes:
+    - ./confs/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+    ports:
+    - "3000:3000"
+    - "5000:5000"
+    networks:
+    - tyk
+    depends_on:
+    - tyk-redis
+    - tyk-mongo
+  tyk-gateway:
+    image: tykio/tyk-gateway:latest
+    ports:
+    - "8080:8080"
+    volumes:
+    - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
+    networks:
+    - tyk
+    depends_on:
+    - tyk-redis
+  tyk-pump:
+    volumes:
+    - ./confs/pump.conf:/opt/tyk-pump/pump.conf
+    image: tykio/tyk-pump-docker-pub:latest
+    networks:
+    - tyk
+    depends_on:
+    - tyk-redis
+    - tyk-mongo
+    - tyk-gateway
+  tyk-redis:
+    image: redis
+    ports:
+    - "6379:6379"
+    volumes:
+    - redis-data:/data
+    networks:
+    - tyk
+  tyk-mongo:
+    image: mongo:3.2
+    command: ["mongod", "--smallfiles"]
+    ports:
+    - "27017:27017"
+    volumes:
+    - mongo-data:/data/db
+    networks:
+    - tyk
+
+volumes:
+  redis-data:
+  mongo-data:
+
+networks:
+  tyk:

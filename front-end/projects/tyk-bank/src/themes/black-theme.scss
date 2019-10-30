@@ -1,0 +1,9 @@
+$tyk-black-primary: mat-palette($mat-grey, 700, 300, 900);
+$tyk-black-accent: mat-palette($mat-blue-grey, 400);
+$tyk-black-warn: mat-palette($mat-red, 500);
+
+$tyk-black-theme: mat-dark-theme(
+  $tyk-black-primary,
+  $tyk-black-accent,
+  $tyk-black-warn
+);

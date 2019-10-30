@@ -1,0 +1,9 @@
+$tyk-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$tyk-nature-accent: mat-palette($mat-deep-purple, 300);
+$tyk-nature-warn: mat-palette($mat-red, 600);
+
+$tyk-nature-theme: mat-light-theme(
+  $tyk-nature-primary,
+  $tyk-nature-accent,
+  $tyk-nature-warn
+);

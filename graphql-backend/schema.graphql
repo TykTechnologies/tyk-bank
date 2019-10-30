@@ -1,0 +1,61 @@
+scalar Date
+
+type User {
+    id: ID!
+    balance: Int!
+    name: String!
+    email: String!
+    address: Address
+    transactions(first: Int!, afterID: ID): [Transaction]
+}
+
+type Address {
+    street: String
+    city: String
+    postalCode: String
+    country: String
+}
+
+type Transaction {
+    id: ID!
+    date: Date!
+    amount: Int!
+    sender: User!
+    recipient: User!
+}
+
+input NewTransaction {
+    sender: ID!
+    recipient: ID!
+    amount: Int!
+}
+
+input AddressInput {
+    street: String!
+    city: String!
+    postalCode: String!
+    country: String!
+}
+
+input UpdateUserDetailsInput {
+    name: String
+    address: AddressInput
+}
+
+input NewUserInput {
+    balance: Int!
+    name: String!
+    email: String!
+}
+
+type Query {
+    user(id: ID!): User
+    users: [User]
+    transactions(first: Int!, afterID: ID): [Transaction]
+}
+
+type Mutation {
+    createUser(input: NewUserInput!): User
+    makeTransaction(input: NewTransaction!): Transaction!
+    updateUserDetails(userID: ID!,input: UpdateUserDetailsInput!): User
+}

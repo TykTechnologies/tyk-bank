@@ -1,0 +1,21 @@
+<div class="background">
+    <div class="gradient">
+        <div class="container">
+            <h1>{{ 'tyk.transactions.request-loan' | translate }}</h1>
+
+            <form class="request-loan-form">
+                
+                <mat-form-field>
+                    <input placeholder="Amount" type="number" matInput [(ngModel)]="requestAmount" name="requestAmount" />
+                </mat-form-field>
+                <br>
+                <div>
+                    <a [ngClass]="routeAnimationsElements" (click)="requestLoan()" mat-raised-button class="actions-main" color="primary">
+                        {{ 'tyk.transactions.request-loan-action-button' | translate }}
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

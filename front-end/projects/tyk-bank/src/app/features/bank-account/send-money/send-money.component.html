@@ -1,0 +1,28 @@
+<div class="background">
+    <div class="gradient">
+        <div class="container">
+            <h1>{{ 'tyk.transactions.send-money' | translate }}</h1>
+
+            <form class="send-money-form">
+                <mat-form-field>
+                    <mat-select placeholder="Recipient" [(value)]="selectedRecipientId" name="selectedRecipient">
+                        <mat-option *ngFor="let user of users | async" value="{{user.id}}">
+                            {{ user.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input placeholder="Amount" type="number" matInput [(ngModel)]="amountToSend" name="amountToSend" />
+                </mat-form-field>
+                <br>
+                <div>
+                    <a [ngClass]="routeAnimationsElements" (click)="sendMoney()" mat-raised-button class="actions-main" color="primary">
+                        {{ 'tyk.transactions.send-money-action-button' | translate }}
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

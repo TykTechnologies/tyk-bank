@@ -45,7 +45,7 @@ services:
     - tyk
 ######### IdP
   keycloak:
-    image: jboss/keycloak
+    image: jboss/keycloak:7.0.0
     restart: always
     volumes:
     - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json

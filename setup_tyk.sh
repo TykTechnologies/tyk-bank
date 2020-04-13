@@ -56,8 +56,7 @@ then
 fi
 
 echo "Creating Organisation"
-# ORG_DATA=$(curl --silent --header "admin-auth: 12345" --header "Content-Type:application/json" --data '{"owner_name": "TestOrg5 Ltd.","owner_slug": "testorg", "cname_enabled":true, "cname": "'$TYK_PORTAL_DOMAIN'"}' http://$DOCKER_IP:3000/admin/organisations 2>&1)
-ORG_DATA=$(curl --silent --header "admin-auth: 12345" --header "Content-Type:application/json" --data '{"owner_name": "TestOrg5 Ltd.","owner_slug": "testorg"}' http://$DOCKER_IP:3000/admin/organisations 2>&1)
+ORG_DATA=$(curl --silent --header "admin-auth: 12345" --header "Content-Type:application/json" --data '{"owner_name": "TestOrg5 Ltd.","owner_slug": "testorg", "cname_enabled":true, "cname": "'$TYK_PORTAL_DOMAIN'"}' http://$DOCKER_IP:3000/admin/organisations 2>&1)
 ORG_ID=$(echo $ORG_DATA | $PYTHON_BIN -c 'import json,sys;obj=json.load(sys.stdin);print(obj["Meta"])')
 echo "ORG ID: $ORG_ID"
 

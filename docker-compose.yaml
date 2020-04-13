@@ -2,7 +2,7 @@
 version: "3.7"
 
 services:
-######### Back end
+  ######### Back end
   server_db:
     image: postgres
     restart: always
@@ -11,16 +11,16 @@ services:
     ports:
       - 15432:5432
     networks:
-    - tyk
+      - tyk
   adminer:
     image: adminer
     restart: always
     ports:
       - 7777:8080
     networks:
-    - tyk
+      - tyk
   graphql:
-    depends_on: 
+    depends_on:
       - server_db
       - adminer
     image: tyk-bank-server
@@ -32,7 +32,7 @@ services:
     ports:
       - 18080:18080
     networks:
-    - tyk
+      - tyk
   loan-service:
     image: loan-service
     build: ./loan-service
@@ -42,18 +42,18 @@ services:
     environment:
       GRAPHQLAPI: http://graphql:18080/query
     networks:
-    - tyk
-######### IdP
+      - tyk
+  ######### IdP
   keycloak:
-    image: jboss/keycloak
+    image: jboss/keycloak:7.0.0
     restart: always
     volumes:
-    - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json
+      - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json
     ports:
       - 8081:8080
     networks:
-    - tyk
-######### Front-end
+      - tyk
+  ######### Front-end
   frontend:
     image: tyk-bank-fe
     build: ./front-end
@@ -62,56 +62,57 @@ services:
       - 4200:4200
     networks:
       - tyk
-######### Tyk Stack
+  ######### Tyk Stack
   tyk-dashboard:
     image: tykio/tyk-dashboard:latest
     volumes:
-    - ./confs/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+      - ./confs/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
     ports:
-    - "3000:3000"
-    - "5000:5000"
+      - "3000:3000"
+      - "5000:5000"
     networks:
-    - tyk
+      - tyk
     depends_on:
-    - tyk-redis
-    - tyk-mongo
+      - tyk-redis
+      - tyk-mongo
   tyk-gateway:
     image: tykio/tyk-gateway:latest
     ports:
-    - "8080:8080"
+      - "8080:8080"
     volumes:
-    - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
+      - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
+      - ./middleware:/opt/tyk-gateway/middleware
     networks:
-    - tyk
+      - tyk
     depends_on:
-    - tyk-redis
+      - tyk-redis
   tyk-pump:
     volumes:
-    - ./confs/pump.conf:/opt/tyk-pump/pump.conf
+      - ./confs/pump.conf:/opt/tyk-pump/pump.conf
     image: tykio/tyk-pump-docker-pub:latest
     networks:
-    - tyk
+      - tyk
     depends_on:
-    - tyk-redis
-    - tyk-mongo
-    - tyk-gateway
+      - tyk-redis
+      - tyk-mongo
+      - tyk-gateway
   tyk-redis:
     image: redis
     ports:
-    - "6379:6379"
+      - "6379:6379"
     volumes:
-    - redis-data:/data
+      - redis-data:/data
     networks:
-    - tyk
+      - tyk
   tyk-mongo:
     image: mongo:3.2
     command: ["mongod", "--smallfiles"]
     ports:
-    - "27017:27017"
+      - "27017:27017"
     volumes:
-    - mongo-data:/data/db
+      - mongo-data:/data/db
     networks:
-    - tyk
+      - tyk
 
 volumes:
   redis-data:

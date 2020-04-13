@@ -1,9 +1,16 @@
 ## Tyk-Bank
-This repository contains a PoC demonstrating a full stack application powered by Angular, GraphQL, GO, and secured by the Tyk API Gateway, Keycloak and OIDC.
+This repository contains a PoC demonstrating a full stack application powered by :
+- Angular
+- GraphQL
+- GO
 
-This entire PoC can be run locally using Docker.
+and secured by: 
+- Tyk API Gateway
+- Keycloak
+- OIDC
 
 ### Dependencies
+This entire PoC can be run locally using Docker.  Though development will require `npm`.
 - Docker
 - Docker Compose
 
@@ -12,7 +19,7 @@ This entire PoC can be run locally using Docker.
 #### disabling CORS
 You will need to run your browser without CORS in order for the front-end to talk to the API. 
 
-If on Chrome, you can copy paste the following into a terminal:
+If Chrome is downloaded on OSX, you can copy paste the following into a terminal:
 `open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
 
 #### MAC OS

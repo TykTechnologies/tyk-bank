@@ -8,8 +8,6 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 RUN npm install --production
 RUN npm install @angular/cli \
                 express \

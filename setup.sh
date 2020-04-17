@@ -10,6 +10,12 @@
 
 # OSX users will need to specify a virtual IP, linux users can use 127.0.0.1
 
+
+# Add the "BANK" user to GraphQL
+echo "Bootstrapping the Bank"
+curl 'http://localhost:18080/query' -H 'Content-Type: application/json' --data-binary $'{"operationName":"createUser","variables":{"email":"BANK@tyk.io","name":"BANK","balance":9999999},"query":"mutation createUser($balance: Int!, $name: String!, $email: String!){createUser(input: { balance: $balance, name: $name, email: $email }) {id balance name}}"}' --compressed
+
+
 # Tyk dashboard settings
 TYK_DASHBOARD_USERNAME="test$RANDOM@test.com"
 TYK_DASHBOARD_PASSWORD="test123"

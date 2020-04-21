@@ -79,7 +79,7 @@ Run `setup.sh`
 $ ./setup.sh
 ```
 
-Note that the `setup_tyk.sh` setup will generate a Tyk user/pw that you will log into the Dashboard with.
+Note that the `setup.sh` setup will generate a Tyk user/pw that you will log into the Dashboard with.
 
 ### 3. Create bank users with balances
 

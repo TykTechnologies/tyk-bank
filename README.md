@@ -1,6 +1,6 @@
 ## Tyk-Bank
 
-This repository contains a PoC demonstrating a full stack application powered by :
+This repository contains a PoC demonstrating a full stack SPA powered by:
 
 - Angular
 - GraphQL
@@ -18,19 +18,6 @@ This entire PoC can be run locally using Docker. Though development will require
 
 - Docker
 - Docker Compose
-
-## IMPORTANT
-
-#### disabling CORS
-
-If you run into CORS issues, You will need to run your browser without CORS in order for the front-end to talk to the API.
-
-If Chrome is downloaded on OSX, you can copy paste the following into a terminal:
-`open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
-
-#### MAC OS
-
-This PoC will only work turn-key on Mac OS. That's basically because the Docker networking takes advantage of a special hostname `docker.for.mac.localhost` to wire up a few things together. It's definitely possible to get this running outside OSX, you'll just need to make minor modifications.
 
 ## What Is The Stack?
 
@@ -50,14 +37,30 @@ The following are the included services needed to run this PoC
 |           | Redis - GW dependency                                          | 6379  |
 |           | Mongo - DB Depedendency                                        | 27017 |
 
+## IMPORTANT
+
+#### disabling CORS
+
+If you run into CORS issues, You will need to run your browser without CORS in order for the front-end to talk to the API.
+
+If Chrome is downloaded on OSX, you can copy paste the following into a terminal to get a CORS compliant browser - this is _not safe_ for regular web browsing:
+`open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
+
+#### MAC OS
+
+This PoC will only work turn-key on Mac OS. That's basically because the Docker networking takes advantage of a special hostname `docker.for.mac.localhost` to wire up a few things together. It's definitely possible to get this running outside OSX, you'll just need to make minor modifications.
+
 ## Running The Stack
 
-### Prerequisites.
+### Prerequisites
 
-Only things you will need are Docker, a Tyk Pro Dashboard license key, and some time on your hands.
+- Docker,
+- a Tyk Pro Dashboard license key
+- Some time on your hands.
+
 If you don't have a license key, please head on over to www.tyk.io to get a trial key.
 
-When you have your license, please add it to "license_key" field in "confs/tyk_analytics.conf".
+_When you have your license, please add it to "license_key" field in "confs/tyk_analytics.conf"._
 
 ### 1) Docker-Compose up
 
@@ -116,12 +119,12 @@ Log onto the dashboard at http://localhost:3000. The username and password were 
 
 Done! Now you can log into the application as a Banking customer on `http://localhost:4200`. Hit sign in and log in using the credentials you created for the keycloak user.
 
-##### Custom IdP?
+### Custom IdP?
 
 If you are using everything included in this guide, you can skip to next section.
 You will need to inject the generated GraphQL User ID into the OIDC claims (`ID_TOKEN`) so this app can inject it into the Header to Tyk. Also set up the issuer with your provider when creating the API definition within Tyk.
 
-## Todos
+### Todos
 
 Hello Open Source World, can you help ?
 

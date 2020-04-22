@@ -11,7 +11,9 @@ import (
 	"os"
 
 	"github.com/99designs/gqlgen/handler"
+	"github.com/go-chi/chi"
 	_ "github.com/lib/pq"
+	"github.com/rs/cors"
 )
 
 const (
@@ -57,11 +59,17 @@ func main() {
 
 	log.Printf("database migration complete!\n")
 
-	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
-	http.Handle("/query", handler.GraphQL(graphql_backend.NewExecutableSchema(graphql_backend.Config{Resolvers: graphql_backend.NewResolver(db)})))
+	router := chi.NewRouter()
+	// Add CORS middleware around every request
+	// See https://github.com/rs/cors for full option listing
+
+	router.Handle("/", handler.Playground("GraphQL playground", "/query"))
+	router.Handle("/query", handler.GraphQL(graphql_backend.NewExecutableSchema(graphql_backend.Config{Resolvers: graphql_backend.NewResolver(db)})))
+
+	h := cors.AllowAll().Handler(router)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground\n", defaultServerPort)
-	log.Fatal(http.ListenAndServe(":"+defaultServerPort, nil))
+	log.Fatal(http.ListenAndServe(":"+defaultServerPort, h))
 }
 
 func migrateDatabase(db *sql.DB) error {

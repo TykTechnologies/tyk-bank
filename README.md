@@ -36,27 +36,19 @@ This PoC will only work turn-key on Mac OS. That's basically because the Docker 
 
 The following are the included services needed to run this PoC
 
-### Front end
-
-- Angular Front End ---> Runs on Port 4200
-
-### Back end
-
-- Go GraphQL Server (Run from source) ---> Port 18080
-- PostgreSQL (Go Server DB) ---> Port 15432
-- Adminer (DB management for PostgreSQL) ---> Port 7777
-- Loans Microservice (Node / Express) ---> Port 3001
-
-### Keycloak
-
-- Keycloak - (Authentication (OIDC) Provider) ---> Runs on port 8081
-
-### Tyk API Gateway
-
-- Tyk API Gateway Stack ---> Gateway and DashBoard on 8080 / 3000 Respectively
-- Mongo ---> Port 27017
-- Redis ---> Port 6379
-- Pump
+| Title     | Description                                                    | Port  |
+| --------- | -------------------------------------------------------------- | ----- |
+| Front end | Angular SPA                                                    | 4200  |
+| Backend   | GraphQL Server. visit `http://localhost:18080` for playground. | 18080 |
+|           | PostgreSQL - Go Server DB                                      | 15432 |
+|           | Adminer - DB Management for PostgreSQL                         | 7777  |
+|           | Loans Microservice - Node/Express                              | 3001  |
+| IDP       | Keycloak                                                       | 8081  |
+| Tyk       | Dashboard                                                      | 3000  |
+|           | Gateway                                                        | 8080  |
+|           | Pump                                                           | N/A   |
+|           | Redis - GW dependency                                          | 6379  |
+|           | Mongo - DB Depedendency                                        | 27017 |
 
 ## Running The Stack
 

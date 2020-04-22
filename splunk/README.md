@@ -1,7 +1,26 @@
-## Add Splunk demo
+## Splunk Example With Tyk Analytics
 
-## Run Splunk
+## Running
 
-docker run -d -p 8000:8000 -p 8088:8088 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=password" --name splunk splunk/splunk:latest
+In the root of `tyk-bank`, run
 
-Hello World
+`$ docker-compose -f splunk/docker-compose.yaml up -d`
+
+## Setting up
+
+### 1. Setup a collector in Splunk
+
+A) Visit http://localhost:8000 and log into the Splunk Dashboard using the username `admin` and the password you set in the docker-compose file.
+
+B) Create a new Data input
+![](images/step1.png)
+
+### 2. Add the Splunk bit to pump.conf
+
+asdsad
+
+### 3. ????
+
+sadsadas
+
+### 4. PROFIT!

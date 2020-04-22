@@ -26,19 +26,20 @@ _When you have your license, please add it to "license_key" field in "confs/tyk_
 
 The following are the included services needed to run this PoC
 
-| Title     | Description                                                    | Port  |
-| --------- | -------------------------------------------------------------- | ----- |
-| Front end | Angular SPA                                                    | 4200  |
-| Backend   | GraphQL Server. visit `http://localhost:18080` for playground. | 18080 |
-|           | PostgreSQL - Go Server DB                                      | 15432 |
-|           | Adminer - DB Management for PostgreSQL                         | 7777  |
-|           | Loans Microservice - Node/Express                              | 3001  |
-| IDP       | Keycloak                                                       | 8081  |
-| Tyk       | Dashboard                                                      | 3000  |
-|           | Gateway                                                        | 8080  |
-|           | Pump                                                           | N/A   |
-|           | Redis - GW dependency                                          | 6379  |
-|           | Mongo - DB Depedendency                                        | 27017 |
+| Title     | Description                                                           | Port       |
+| --------- | --------------------------------------------------------------------- | ---------- |
+| Front end | Angular SPA                                                           | 4200       |
+| Backend   | GraphQL Server. visit `http://localhost:18080` for playground.        | 18080      |
+|           | PostgreSQL - Go Server DB                                             | 15432      |
+|           | Adminer - DB Management for PostgreSQL                                | 7777       |
+|           | Loans Microservice - Node/Express                                     | 3001       |
+| IDP       | Keycloak                                                              | 8081       |
+| Tyk       | Dashboard                                                             | 3000       |
+|           | Gateway                                                               | 8080       |
+|           | Pump                                                                  | N/A        |
+|           | Redis - GW dependency                                                 | 6379       |
+|           | Mongo - DB Depedendency                                               | 27017      |
+| Analytics | (Optional) Splunk - Head to splunk directory for install instructions | 8000, 8088 |
 
 ## IMPORTANT
 

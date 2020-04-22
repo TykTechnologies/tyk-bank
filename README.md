@@ -23,7 +23,7 @@ This entire PoC can be run locally using Docker. Though development will require
 
 #### disabling CORS
 
-You will need to run your browser without CORS in order for the front-end to talk to the API.
+If you run into CORS issues, You will need to run your browser without CORS in order for the front-end to talk to the API.
 
 If Chrome is downloaded on OSX, you can copy paste the following into a terminal:
 `open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security`
@@ -133,7 +133,6 @@ You will need to inject the generated GraphQL User ID into the OIDC claims (`ID_
 
 Hello Open Source World, can you help ?
 
-- Make work without CORS special browser
 - Make work with Windows + Linux
 - Replace 'implicit flow' OIDC with something more secure IE OAuth Access Code Flow
 - Add ElasticSearch to stack

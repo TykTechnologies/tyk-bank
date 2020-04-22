@@ -5,19 +5,22 @@ This repository contains a PoC demonstrating a full stack SPA powered by:
 - Angular
 - GraphQL
 - GO
+- NodeJS & Express
 
 and secured by:
 
-- Tyk API Gateway
-- Keycloak
-- OIDC
+- Tyk API Gateway & Management Platform
+- Keycloak via OIDC
 
-### Dependencies
+### Prerequisites
 
-This entire PoC can be run locally using Docker. Though development will require `npm`.
+- Docker,
+- a Tyk Pro Dashboard license key
+- Some time on your hands.
 
-- Docker
-- Docker Compose
+If you don't have a license key, please head on over to www.tyk.io to get a trial key.
+
+_When you have your license, please add it to "license_key" field in "confs/tyk_analytics.conf"._
 
 ## What Is The Stack?
 
@@ -51,16 +54,6 @@ If Chrome is downloaded on OSX, you can copy paste the following into a terminal
 This PoC will only work turn-key on Mac OS. That's basically because the Docker networking takes advantage of a special hostname `docker.for.mac.localhost` to wire up a few things together. It's definitely possible to get this running outside OSX, you'll just need to make minor modifications.
 
 ## Running The Stack
-
-### Prerequisites
-
-- Docker,
-- a Tyk Pro Dashboard license key
-- Some time on your hands.
-
-If you don't have a license key, please head on over to www.tyk.io to get a trial key.
-
-_When you have your license, please add it to "license_key" field in "confs/tyk_analytics.conf"._
 
 ### 1) Docker-Compose up
 

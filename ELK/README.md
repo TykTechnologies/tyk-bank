@@ -13,20 +13,19 @@ We need to change the default password for the `elastic` user account that is us
 
 ## Running the ELK Container
 
-#### 1. In the root of the 'tyk-bank' directory run the following command:
+1. In the root of the 'tyk-bank' directory run the following command:
 
 `$ docker-compose -f docker-compose-elk.yaml up -d`
 
-#### 2. Verify that the ELK service containers are running by issuing the following command:
+2. Verify that the ELK service containers are running by issuing the following command:
 
 ` $ docker-compose -f docker-compose-elk.yaml ps`
 
 ## Configure Tyk Pump for ElasticSearch
 
-#### 1.  Open the `tyk-bank/confs/pump.conf` file
+1.  Open the `tyk-bank/confs/pump.conf` file
 
-
-#### 2. Paste the snippet below into the 'pumps' section
+2. Paste the snippet below into the 'pumps' section
 ```json
 "pumps": {
     "elasticsearch": {
@@ -48,8 +47,7 @@ We need to change the default password for the `elastic` user account that is us
 }
 ```
 
-
-#### 3.  The Tyk Pump needs to be restarted to load the ElasticSearch configuration.  Run the following from the command line:
+3.  The Tyk Pump needs to be restarted to load the ElasticSearch configuration.  Run the following from the command line:
 
 `$ docker-compose restart tyk-pump`
 
@@ -59,30 +57,32 @@ To generate analytics data we need to make at least a single call to any of the 
 
 ## Confirm Analytics Data made it to ElasticSearch
 
-#### 1. Open Kibana by navigating to `http://localhost:5601` on your local machine.
+1. Open Kibana by navigating to `http://localhost:5601` on your local machine.
 
-#### 2. Once opened navigate to the gear icon at the bottom of the toolbar to open the Management menu
+2. Once opened navigate to the gear icon at the bottom of the toolbar to open the Management menu
      ![](images/management.jpg)
 
-#### 3. Select the Index Management Menu
-      ![](images/index_mgt.jpg)
+3. Select the Index Management Menu
 
-#### 4. Confirm that there is an entry for `tyk_analytics` in the Index Management Table
+![](images/index_mgt.jpg)
+
+4. Confirm that there is an entry for `tyk_analytics` in the Index Management Table
       ![](images/index_mgt_tbl.jpg)
 
 ## Visualize ElasticSearch Data in Kibana
-#### 1. Navigate to the Discover Menu. 
+
+1. Navigate to the Discover Menu. 
       ![](images/discover.jpg)
 
-#### 2. Type `tyk` in to the Index pattern text box.  This should match on the tyk_analytics index.  
+2. Type `tyk` in to the Index pattern text box.  This should match on the tyk_analytics index.  
       ![](images/index_pattern.jpg)
 
-#### 3. Now the ` > Next step ` button should be enabled, click it.
+3. Now the ` > Next step ` button should be enabled, click it.
 
-#### 4. Select `@timestamp` from the Time Filter field name drop down list and click the 'Create index pattern' button
+4. Select `@timestamp` from the Time Filter field name drop down list and click the 'Create index pattern' button
       ![](images/timestamp.jpg)
 
-#### 5. Navigate back to the Discover Menu.  You should now be visualizing the analytics from Tyk!
+5. Navigate back to the Discover Menu.  You should now be visualizing the analytics from Tyk!
       ![](images/discover.jpg)
 
 ## TODO:

@@ -26,10 +26,9 @@ We need to change the default password for the `elastic` user account that is us
 #### 1.  Open the `tyk-bank/confs/pump.conf` file
 
 
-#### 2. Paste the snippet below into the 'Pumps' section
+#### 2. Paste the snippet below into the 'pumps' section
 ```json
 "pumps": {
-    ...
     "elasticsearch": {
       "type": "elasticsearch",
       "meta": {
@@ -63,23 +62,28 @@ To generate analytics data we need to make at least a single call to any of the 
 #### 1. Open Kibana by navigating to `http://localhost:5601` on your local machine.
 
 #### 2. Once opened navigate to the gear icon at the bottom of the toolbar to open the Management menu
-     !(
+     ![](images/management.jpg)
+
 #### 3. Select the Index Management Menu
+      ![](images/index_mgt.jpg)
 
 #### 4. Confirm that there is an entry for `tyk_analytics` in the Index Management Table
-
+      ![](images/index_mgt_tbl.jpg)
 
 ## Visualize ElasticSearch Data in Kibana
 #### 1. Navigate to the Discover Menu. 
+      ![](images/discover.jpg)
 
 #### 2. Type `tyk` in to the Index pattern text box.  This should match on the tyk_analytics index.  
+      ![](images/index_pattern.jpg)
 
 #### 3. Now the ` > Next step ` button should be enabled, click it.
 
 #### 4. Select `@timestamp` from the Time Filter field name drop down list and click the 'Create index pattern' button
+      ![](images/timestamp.jpg)
 
 #### 5. Navigate back to the Discover Menu.  You should now be visualizing the analytics from Tyk!
-
+      ![](images/discover.jpg)
 
 ## TODO:
 - Project only uses ElasticSearch and Kibana, would be nice to add Logstash to incorporate all of the ELK Stack.

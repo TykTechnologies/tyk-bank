@@ -15,6 +15,9 @@
 echo "Bootstrapping the Bank"
 curl 'http://localhost:18080/query' -H 'Content-Type: application/json' --data-binary $'{"operationName":"createUser","variables":{"email":"BANK@tyk.io","name":"BANK","balance":9999999},"query":"mutation createUser($balance: Int!, $name: String!, $email: String!){createUser(input: { balance: $balance, name: $name, email: $email }) {id balance name}}"}' --compressed
 
+## import keycloak realm
+docker-compose exec keycloak /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin --password pw
+docker-compose exec keycloak /opt/jboss/keycloak/bin/kcadm.sh create partialImport -f /opt/jboss/keycloak-realm.json
 
 # Tyk dashboard settings
 TYK_DASHBOARD_USERNAME="test$RANDOM@test.com"
@@ -89,6 +92,9 @@ echo "Fixing Portal URL"
 URL_DATA=$(curl --silent --header "admin-auth: 12345" --header "Content-Type:application/json" http://$DOCKER_IP:3000/admin/system/reload 2>&1)
 CAT_DATA=$(curl -X POST --silent --header "Authorization: $USER_AUTH" --header "Content-Type:application/json" --data "{}" http://$DOCKER_IP:3000/api/portal/configuration 2>&1)
 
+echo "Importing APIs"
+curl --silent --header "Authorization: $USER_AUTH" --header "Content-Type:application/json" -d @./confs/tyk_graphql_api_def.json http://$DOCKER_IP:3000/api/apis 
+curl --silent --header "Authorization: $USER_AUTH" --header "Content-Type:application/json" -d @./confs/tyk_loanserv_api_def.json http://$DOCKER_IP:3000/api/apis 
 echo ""
 
 echo "DONE"

@@ -51,7 +51,6 @@ services:
       DB_VENDOR: H2
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: pw
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak-realm.json
     volumes:
       - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json
     ports:
@@ -87,6 +86,8 @@ services:
     volumes:
       - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
       - ./middleware:/opt/tyk-gateway/middleware
+      - ./confs/gw_cert.pem:/opt/tyk-gateway/cert.pem
+      - ./confs/gw_key.pem:/opt/tyk-gateway/key.pem
     networks:
       - tyk
     depends_on:

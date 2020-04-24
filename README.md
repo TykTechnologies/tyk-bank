@@ -40,7 +40,10 @@ The following are the included services needed to run this PoC
 |           | Redis - GW dependency                                                 | 6379       |
 |           | Mongo - DB Depedendency                                               | 27017      |
 | Analytics | (Optional) Splunk - Head to splunk directory for install instructions | 8000, 8088 |
-|           | (Optional) ELK - Head to ELK directory for instll instructions        |5001, 9200, 9300, 5601|
+|           | (Optional) ELK - Head to ELK direcotry for install instructions       |9200, 9300, 5001, 5601|
+|           |               - Elastic Search                                        |9200, 9300|
+|           |               - Logstash                                              |5001|
+|           |               - Kibana                                                |5601|
 
 ## IMPORTANT
 

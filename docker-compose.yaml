@@ -86,8 +86,6 @@ services:
     volumes:
       - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
       - ./middleware:/opt/tyk-gateway/middleware
-      - ./confs/gw_cert.pem:/opt/tyk-gateway/cert.pem
-      - ./confs/gw_key.pem:/opt/tyk-gateway/key.pem
     networks:
       - tyk
     depends_on:

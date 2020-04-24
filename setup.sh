@@ -12,10 +12,9 @@
 
 
 # Add the "BANK" user to GraphQL
-echo "Bootstrapping the Bank"
-curl 'http://localhost:18080/query' -H 'Content-Type: application/json' --data-binary $'{"operationName":"createUser","variables":{"email":"BANK@tyk.io","name":"BANK","balance":9999999},"query":"mutation createUser($balance: Int!, $name: String!, $email: String!){createUser(input: { balance: $balance, name: $name, email: $email }) {id balance name}}"}' --compressed
 
-## import keycloak realm
+# ## Import keycloak realm
+echo "Importing Keycloak Realm"
 docker-compose exec keycloak /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin --password pw
 docker-compose exec keycloak /opt/jboss/keycloak/bin/kcadm.sh create partialImport -f /opt/jboss/keycloak-realm.json
 
@@ -97,10 +96,18 @@ curl --silent --header "Authorization: $USER_AUTH" --header "Content-Type:applic
 curl --silent --header "Authorization: $USER_AUTH" --header "Content-Type:application/json" -d @./confs/tyk_loanserv_api_def.json http://$DOCKER_IP:3000/api/apis 
 echo ""
 
+echo "Bootstrapping the Bank"
+curl 'http://localhost:18080/query' -H 'Content-Type: application/json' --data-binary $'{"operationName":"createUser","variables":{"email":"BANK@tyk.io","name":"BANK","balance":9999999},"query":"mutation createUser($balance: Int!, $name: String!, $email: String!){createUser(input: { balance: $balance, name: $name, email: $email }) {id balance name}}"}' --compressed
+GRAPHQL_OUTPUT=$(curl --silent 'http://localhost:18080/query' -H 'Content-Type: application/json' --data-binary $'{"operationName":"createUser","variables":{"email":"hello99@world.com","name":"Hello World99","balance":1000},"query":"mutation createUser($balance: Int!, $name: String!, $email: String!){createUser(input: { balance: $balance, name: $name, email: $email }) {id balance name}}"}' --compressed)
+GRAPHQL_ID=$(echo $GRAPHQL_OUTPUT | $PYTHON_BIN -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"]["createUser"]["id"])')
+echo ""
+
 echo "DONE"
 echo "===="
 echo "Login at http://$TYK_DASH_DOMAIN:3000/"
 echo "Username: $TYK_DASHBOARD_USERNAME"
 echo "Password: $TYK_DASHBOARD_PASSWORD"
 echo "Portal: http://$TYK_PORTAL_DOMAIN:3000$TYK_PORTAL_PATH"
+echo ""
+echo "GraphId for keycloak setup: $GRAPHQL_ID"
 echo ""

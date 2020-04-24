@@ -61,11 +61,12 @@ To generate analytics data we need to make at least a single call to any of the 
 ## Confirm Analytics Data made it to ElasticSearch
 
 #### 1. Open Kibana by navigating to `http://localhost:5601` on your local machine.
-### 2. Once opened navigate to the gear icon at the bottom of the toolbar to open the Management menu
-     !(
-### 3. Select the Index Management Menu
 
-### 4. Confirm that there is an entry for `tyk_analytics` in the Index Management Table
+#### 2. Once opened navigate to the gear icon at the bottom of the toolbar to open the Management menu
+     !(
+#### 3. Select the Index Management Menu
+
+#### 4. Confirm that there is an entry for `tyk_analytics` in the Index Management Table
 
 
 ## Visualize ElasticSearch Data in Kibana

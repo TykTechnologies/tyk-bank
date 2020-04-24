@@ -7,10 +7,6 @@ This repository contains an ELK container with ElasticSearch, Logstash, and Kiba
 
 You should have Docker installed on your local machine.
 
-## Set Credentials for ELK Services
-
-We need to change the default password for the `elastic` user account that is used for the the ELK services.  This can be changed by modifying the `ELASTIC_PASSWORD` field in the `tyk-bank/docker-compose-elk.yaml` file.
-
 ## Running the ELK Container
 
 1. In the root of the 'tyk-bank' directory run the following command:

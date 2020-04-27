@@ -51,7 +51,6 @@ services:
       DB_VENDOR: H2
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: pw
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak-realm.json
     volumes:
       - ./keycloak/keycloak-realm.json:/opt/jboss/keycloak-realm.json
     ports:

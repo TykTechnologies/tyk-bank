@@ -1,6 +1,6 @@
 {
-    "id": "tyk",
-    "realm": "tyk",
+    "id": "master",
+    "realm": "master",
     "notBefore": 0,
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,

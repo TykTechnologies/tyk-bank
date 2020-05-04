@@ -69,8 +69,12 @@ services:
   ######### Tyk Stack
   tyk-dashboard:
     image: tykio/tyk-dashboard:latest
+    environment:
+      TYK_LOGLEVEL: info
     volumes:
       - ./confs/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+      - ./confs/db_cert.pem:/opt/tyk-dashboard/cert.pem
+      - ./confs/db_key.pem:/opt/tyk-dashboard/key.pem
     ports:
       - "3000:3000"
       - "5000:5000"
@@ -86,6 +90,8 @@ services:
     volumes:
       - ./confs/tyk.conf:/opt/tyk-gateway/tyk.conf
       - ./middleware:/opt/tyk-gateway/middleware
+      - ./confs/gw_cert.pem:/opt/tyk-gateway/cert.pem
+      - ./confs/gw_key.pem:/opt/tyk-gateway/key.pem
     networks:
       - tyk
     depends_on:

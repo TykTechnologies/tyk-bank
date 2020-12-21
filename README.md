@@ -1,3 +1,7 @@
+## Deprecated
+
+This repo is no longer supported, please look to [tyk-demo](https://github.com/TykTechnologies/tyk-demo)
+
 ## Tyk-Bank
 
 This repository contains a PoC demonstrating a full stack SPA powered by:
